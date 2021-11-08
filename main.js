@@ -30,3 +30,24 @@ function speak() {
     utterThis = new SpeechSynthesisUtterance(speech_data1);
     synth.speak(utterThis);
 }
+
+function toEmoji() {
+    classifier.classify(document.getElementById("resultimg"), function (error, results) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(results);
+            prediction1 = results[0].label;
+            prediction2 = results[1].label;
+            speak()
+            document.getElementById("result_emotion_name").innerHTML = prediction1
+            if (prediction1 == "Victory") {
+                document.getElementById("emoji1").innerHTML = "&#9996"
+            } else if (prediction1 == "Best") {
+                document.getElementById("emoji1").innerHTML = "&#128077"
+            } else if (prediction1 == "Amazing") {
+                document.getElementById("emoji1").innerHTML = "&#128076"
+            }
+        }
+    })
+}
